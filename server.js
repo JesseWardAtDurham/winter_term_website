@@ -1,21 +1,31 @@
 const express = require('express')
 const app = express()
-app.use("/client", express.static(__dirname + '/client'));
+
+
+let jsonData = require("./birdsandpics.json"); 
+jsonData = JSON.parse(JSON.stringify(jsonData))
+
+app.use("/client", express.static(__dirname + "/client"));
 app.use(express.urlencoded({ extended: false }));
 
 
 app.get('/', function(req, resp){
-   resp.send('Hello world')
+   jsonData["National_Parks"][0]["bird_pictures"][0]=jsonData["Bird_Pictures"][0]
+   resp.send(jsonData["National_Parks"][0]["bird_pictures"][0])
 })
+
+
 app.get('/w', (req, res) => {
    res.send("hello" + req.query.person)
  })
+
+
 app.post("/new", function(req, resp){
    console.log("got request")
    console.log(req.body.person)
+   console.log(jsonData)
    resp.send("hello you")
 })
-let instruments = [ 'piano', 'concertina', 'double bass'];
 
 app.get('/list', function (req, resp){
     resp.send(instruments);
