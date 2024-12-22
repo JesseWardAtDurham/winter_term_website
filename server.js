@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: false }));
 
 
 app.get('/', function(req, resp){
-   jsonData["National_Parks"][0]["bird_pictures"][0]=jsonData["Bird_Pictures"][0]
-   resp.send(jsonData["National_Parks"][0]["bird_pictures"][0])
+   a=jsonData["National_Parks"][0]["bird_pictures"][0]
+   
+   resp.send(jsonData["Bird_Pictures"][a])
+   
 })
 
 
