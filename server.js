@@ -53,14 +53,14 @@ app.get('/bird', function (req, resp) {
 })
 
 function getBird(birdName) {
-   currrentData = jsonData["Birds"][0]
+   currentData = jsonData["Birds"][0]
    i = 0
-   while (currrentData != undefined) {
+   while (currentData != undefined) {
       i += 1
-      if (currrentData["birdName"] == birdName) {
-         return currrentData
+      if (currentData["birdName"] == birdName) {
+         return currentData
       }
-      currrentData = currrentData = jsonData["Birds"][i]
+      currentData = currentData = jsonData["Birds"][i]
    }
 }
 
