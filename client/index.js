@@ -131,12 +131,13 @@ function addListener(id){
     currentButton = document.getElementById(id)
     currentButton.addEventListener("click", function(event){
         fetch('http://127.0.0.1:8090/bird?bird='+id)
-        .then(response => response.text())
+        .then(response => response.text(),function(){window.alert("connection failure")})
         .then(body =>
             displayIMG(body)
         )
     })
 }
+//fnm env --use-on-cd | Out-String | Invoke-Expression
 
 // a=document.createElement("div")
 // dartmoorButton.after(a)
