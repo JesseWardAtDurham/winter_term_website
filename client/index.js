@@ -1,25 +1,31 @@
 
-robinButton =  document.getElementById("Robin")
 
-robinButton.addEventListener('click', function(event){
-    fetch('http://127.0.0.1:8090/bird?bird=Robin')
-     .then(response => response.text())
-     .then(body =>
-        displayIMG(body)
-        
-     )
-  });
+purgeSideBar()
 
-finchButton =  document.getElementById("Goldfinch")
+window.onload = getJson
+function getJson(){
+    fetch("http://127.0.0.1:8090/json").then(response => response.text()).then(body=>loadSideBar(body))
+}
 
-finchButton.addEventListener('click', function(event){
-    fetch('http://127.0.0.1:8090/bird?bird=Goldfinch')
-     .then(response => response.text())
-     .then(body =>
-        displayIMG(body)
-        
-     )
-  });
+console.log("hello1")
+
+
+newBird=document.getElementById("newBird")
+
+newBird.addEventListener("click",function(event){
+    purgeImages()
+    col=document.getElementsByClassName("col")
+    newForm=document.createElement("form")
+    newForm.action="http://127.0.0.1:8090/newBird"
+    newForm.method="post"
+    p1=document.createElement("p")
+    p1.innerHTML="Bird Species Name"
+    input1=document.createElement("input")
+    input1.name="birdName"
+    p1.append(input1)
+    newForm.append(p1)
+    col[0].append(newForm)
+})
 
 newPic=document.getElementById("newBirdPicture")
 
@@ -53,7 +59,6 @@ newPic.addEventListener("click",function(event){
     p4.append(input4)
     newForm.append(p4)
     col[0].append(newForm)
-
 })
 
 
@@ -73,6 +78,18 @@ function purgeImages(){
     }
 }
 
+function purgeSideBar(){
+    birdSpeciesArray=[]
+    navBar = document.getElementsByClassName("nav flex-column")
+    currentButton=navBar[0].firstElementChild
+    currentButton = currentButton.nextElementSibling
+    while (currentButton.id!="newBirdPicture"){
+        next=currentButton.nextElementSibling
+        currentButton.remove()
+        currentButton=next
+    }
+}
+
 function displayIMG(json){
     purgeImages()
     jsonData=JSON.parse(json);
@@ -87,6 +104,40 @@ function displayIMG(json){
         i+=1
     }
 }
+function loadSideBar(json){
+    navBar = document.getElementsByClassName("nav flex-column")
+    firstText=navBar[0].firstElementChild.nextElementSibling
+    i=0
+    jsonData=JSON.parse(json)
+    //console.log(jsonData)
+    while (jsonData["Birds"][i]!=undefined){
+        id=jsonData["Birds"][i]["birdName"]
+        buttonToAdd=createButtonToAdd(id,id)
+        i+=1
+        firstText.before(buttonToAdd)
+        addListener(id)
+    }
+}
+
+function createButtonToAdd(id,text){
+    button = document.createElement("button")
+    button.className="btn btn-light"
+    button.id=id
+    button.innerHTML=text
+    return button
+}
+
+function addListener(id){
+    currentButton = document.getElementById(id)
+    currentButton.addEventListener("click", function(event){
+        fetch('http://127.0.0.1:8090/bird?bird='+id)
+        .then(response => response.text())
+        .then(body =>
+            displayIMG(body)
+        )
+    })
+}
+
 // a=document.createElement("div")
 // dartmoorButton.after(a)
 

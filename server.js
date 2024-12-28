@@ -46,6 +46,15 @@ app.post("/newPic",function(req, resp){
 
 })
 
+app.post("/newBird",function(req, resp){
+   birdName=req.body.birdName
+
+   jsonData["Birds"].push({birdName:birdName,bird_pictures:[]})
+
+   console.log(jsonData["Birds"])
+   resp.redirect("http://127.0.0.1:8090/client/")
+})
+
 app.get('/bird', function (req, resp) {
    toGo = getBird(req.query.bird)
    //console.log(toGo)
@@ -63,5 +72,10 @@ function getBird(birdName) {
       currentData = currentData = jsonData["Birds"][i]
    }
 }
+
+app.get("/json",function (req, resp){
+   toGo = jsonData
+   resp.send(toGo)
+})
 
 app.listen(8090)
