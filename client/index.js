@@ -131,7 +131,7 @@ function addListener(id){
     currentButton = document.getElementById(id)
     currentButton.addEventListener("click", function(event){
         fetch('http://127.0.0.1:8090/bird?bird='+id)
-        .then(response => response.text(),function(){window.alert("connection failure")})
+        .then(response => response.text(),function(){window.alert("connection failure, please wait and try again later")})
         .then(body =>
             displayIMG(body)
         )
