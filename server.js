@@ -73,9 +73,13 @@ function getBird(birdName) {
    }
 }
 
+
 app.get("/json",function (req, resp){
    toGo = jsonData
    resp.send(toGo)
 })
 
 app.listen(8090)
+
+
+ module.exports = getBird;
