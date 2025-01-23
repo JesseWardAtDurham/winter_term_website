@@ -12,7 +12,7 @@ Used when the page is loaded for the first time to give the initial data
 
 ### Response
 
-Just gives the whole json file:
+Just gives the whole json file (this is it initially):
 
 ```
 

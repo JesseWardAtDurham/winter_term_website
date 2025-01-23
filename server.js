@@ -12,7 +12,7 @@ app.post("/newPic",function(req, resp){
    birdName=req.body.birdName
    pictureURL=req.body.pictureURL
    altText=req.body.altText
-   console.log("hello")
+   //console.log("hello")
    i=0
    while(jsonData["Birds"][i]){
       if(jsonData["Birds"][i]["birdName"]===birdName){
@@ -20,7 +20,8 @@ app.post("/newPic",function(req, resp){
       }
       i+=1
    }
-   console.log(jsonData["Birds"])
+   //console.log(jsonData["Birds"])
+   resp.status(200)
    resp.redirect("http://127.0.0.1:8090/client/")
 
 })
@@ -31,13 +32,15 @@ app.post("/newBird",function(req, resp){
    jsonData["Birds"].push({birdName:birdName,bird_pictures:[]})
 
    console.log(jsonData["Birds"])
+   resp.status(200)
    resp.redirect("http://127.0.0.1:8090/client/")
 })
 
 app.get('/bird', function (req, resp) {
    toGo = getBird(req.query.bird)
    //console.log(toGo)
-   resp.send(toGo);
+   resp.status(200)
+   resp.send(toGo)  
 })
 
 function getBird(birdName) {
@@ -55,7 +58,9 @@ function getBird(birdName) {
 
 app.get("/json",function (req, resp){
    toGo = jsonData
+   resp.status(200)
    resp.send(toGo)
+   
 })
 
 app.listen(8090)
