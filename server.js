@@ -69,7 +69,7 @@ function getBird(birdName) {
       if (currentData["birdName"] == birdName) {
          return currentData
       }
-      currentData = currentData = jsonData["Birds"][i]
+      currentData = jsonData["Birds"][i]
    }
 }
 
