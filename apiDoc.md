@@ -99,6 +99,9 @@ But the json object will contain the same information but for the relevant bird
 
 This POST request adds a new birdPicture json entity
 
+### Response
+sends no response but does redirect back to the home page (http://127.0.0.1:8090/client/)
+
 ## POST /newBird
 
 |  Name | Description  | Example  |
@@ -107,3 +110,5 @@ This POST request adds a new birdPicture json entity
 
 This adds a new bird json entity to the json file, so that pictures for this bird species can be added
 
+### Response
+sends no response but does redirect back to the home page (http://127.0.0.1:8090/client/)
