@@ -7,9 +7,6 @@ function getJson(){
     fetch("http://127.0.0.1:8090/json").then(response => response.text()).then(body=>loadSideBar(body))
 }
 
-console.log("hello1")
-
-
 newBird=document.getElementById("newBird")
 
 newBird.addEventListener("click",function(event){

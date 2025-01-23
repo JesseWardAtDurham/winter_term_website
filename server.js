@@ -8,27 +8,6 @@ jsonData = JSON.parse(JSON.stringify(jsonData))
 app.use("/client", express.static(__dirname + "/client"));
 app.use(express.urlencoded({ extended: false }));
 
-
-app.get('/', function (req, resp) {
-   a = jsonData["National_Parks"][0]["bird_pictures"][0]
-
-   resp.send(jsonData["Bird_Pictures"][a])
-
-})
-
-
-app.get('/w', (req, res) => {
-   res.send("hello" + req.query.person)
-})
-
-
-app.post("/new", function (req, resp) {
-   console.log("got request")
-   console.log(req.body.person)
-   console.log(jsonData)
-   resp.send("hello you")
-})
-
 app.post("/newPic",function(req, resp){
    birdName=req.body.birdName
    pictureURL=req.body.pictureURL
