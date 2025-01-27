@@ -4,6 +4,7 @@
     "Birds":[
         {
             "birdName":"Robin",
+            "birdInfo":"",
             "bird_pictures":
                 [
                         {
@@ -18,6 +19,7 @@
         },
         {
             "birdName":"Goldfinch",
+            "birdInfo":"",
             "bird_pictures":
             [
                         {
