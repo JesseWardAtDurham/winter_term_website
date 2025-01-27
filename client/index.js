@@ -1,7 +1,7 @@
 
 
 purgeSideBar()
-
+changed = false
 window.onload = getJson
 function getJson(){
     fetch("http://127.0.0.1:8090/json").then(response => response.text()).then(body=>loadSideBar(body))
@@ -89,20 +89,44 @@ function purgeSideBar(){
 
 function displayIMG(json){
     purgeImages()
-    jsonData=JSON.parse(json);
-    console.log(jsonData["bird_pictures"])
-    i=0
-    col=document.getElementsByClassName("col")
-    while(jsonData["bird_pictures"][i]!=undefined){
-        img1=document.createElement("img")
-        img1.src=jsonData["bird_pictures"][i]["pictureURL"]
-        img1.className="img-fluid"
-        col[i%2].append("",img1)
-        i+=1
+    if(window.innerHeight > window.innerWidth){
+        jsonData=JSON.parse(json);
+        console.log(jsonData["bird_pictures"])
+        i=0
+        col=document.getElementsByClassName("col")
+        otherCol=document.getElementsByClassName("col-2")
+        otherCol.className+="col"
+        if(changed != true){
+            col[1].remove()
+            changed=true
+        }
+        
+        while(jsonData["bird_pictures"][i]!=undefined){
+            img1=document.createElement("img")
+            img1.src=jsonData["bird_pictures"][i]["pictureURL"]
+            img1.className="img-fluid"
+            col[0].append("",img1)
+            i+=1
+        }
+    }
+    else{
+        jsonData=JSON.parse(json);
+        console.log(jsonData["bird_pictures"])
+        i=0
+        col=document.getElementsByClassName("col")
+        while(jsonData["bird_pictures"][i]!=undefined){
+            img1=document.createElement("img")
+            img1.src=jsonData["bird_pictures"][i]["pictureURL"]
+            img1.className="img-fluid"
+            col[i%2].append("",img1)
+            i+=1
+        }
     }
 }
-function loadSideBar(json){
+function loadSideBar(json){    
+
     navBar = document.getElementsByClassName("nav flex-column")
+    navBar.height=200
     firstText=navBar[0].firstElementChild.nextElementSibling
     i=0
     jsonData=JSON.parse(json)
